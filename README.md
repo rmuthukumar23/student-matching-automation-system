@@ -1,4 +1,4 @@
-# Student Peer Matching App
+# Student Tutor Matching App
 
 **CS IB Computer Science IA Project**  
 
