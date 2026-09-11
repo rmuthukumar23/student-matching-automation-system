@@ -2,9 +2,9 @@
 
 An Android admin tool built for **Students for Students**, a student-run tutoring initiative, to make tutor-student matching faster and easier to manage.
 
-The project replaced a manual Google Sheets matching workflow with a lightweight application that imports tutoring requests and tutor availability, applies matching criteria, updates records, and supports follow-up communication from one interface.
+The project replaced a manual Google Sheets workflow with a lightweight application for reviewing tutoring requests, finding students and tutors, moving selected records through the matching workflow, and keeping the process connected to the organization's existing spreadsheet-based operations.
 
-> **Project status:** This repository is a portfolio archive of the finished application and its development documentation. The installable APK and project reports are included. The original MIT App Inventor source project is not currently published in this repository.
+> **Project status:** Portfolio archive of the completed application. The repository includes the Android APK, development documentation, and a **sanitized export of the core MIT App Inventor client logic**. Live Google Apps Script endpoints, credentials, student records, and the original operational backend are intentionally not published.
 
 ## Problem
 
@@ -12,38 +12,43 @@ Tutor matching was previously handled manually in spreadsheets. As the number of
 
 The goal was to design a tool that could:
 
-- reduce the time required to process matches
-- keep tutor and student records synchronized with Google Sheets
-- make unmatched requests easy to identify
-- support administrators without requiring technical knowledge
-- preserve a simple workflow that could fit the organization's existing process
+- reduce the time required to process tutoring requests
+- keep the workflow connected to existing Google Sheets data
+- make unmatched students and tutors easier to identify
+- let administrators search and review records without manually navigating spreadsheets
+- preserve a simple interface that non-technical administrators could use
 
 ## Solution
 
-The application provides administrators with a single workflow for importing data, reviewing availability, running the matching process, updating records, and communicating with participants.
+The application provides an admin-facing Android workflow for authentication, loading student and tutor requests, searching records, reviewing details, and progressing selected students into the matching flow.
 
 ```mermaid
 flowchart LR
-    A[Admin] --> B[Android Admin App]
-    C[Google Sheets] <--> B
-    B --> D[Matching Logic]
-    D --> E[Matched Pairs]
-    D --> F[Unmatched Students]
-    D --> G[Available Tutors]
-    E --> C
-    B --> H[Bulk Communication]
+    A[Admin] --> B[Android Client]
+    B --> C[Authentication Endpoint]
+    B --> D[Student Requests Endpoint]
+    B --> E[Tutor Requests Endpoint]
+    C --> F[Google Apps Script / Sheets Services]
+    D --> F
+    E --> F
+    B --> G[Matching Workflow]
 ```
+
+The recovered `.aia` project is the **client layer**. Operational data services were handled through external Google Apps Script / Google Sheets integration, so the client source alone does not represent the full system.
 
 ## Key Features
 
-- **Automated tutor matching** based on compatibility criteria
-- **Google Sheets integration** for importing and updating operational data
-- **Admin authentication** before accessing the workflow
-- **Match tracking** using unique matchup IDs
-- **Unmatched request visibility** for students and tutors who still require action
-- **Bulk email support** for follow-up communication
-- **Input validation and error handling** for common data issues
-- **Client-informed interface design** refined through feedback during development
+- **Admin authentication** with form validation and login-state feedback
+- **Student request retrieval** from an external data service
+- **Tutor request retrieval** from an external data service
+- **Search by request ID** for student and tutor records
+- **Structured request views** showing name, grade, and subject
+- **Student selection handoff** into a dedicated matching screen
+- **JSON parsing and validation** for web-service responses
+- **Error handling** for missing records and invalid responses
+- **Client-informed interface design** refined during development
+
+The original project documentation also describes the broader operational matching and communication workflow. Parts of that workflow depended on external services that are not included in this public archive.
 
 ## Documented Outcomes
 
@@ -53,36 +58,43 @@ The project documentation records the following results:
 - matching success rate of **90% or higher** under the evaluated test conditions
 - workflow designed to support responses to tutoring requests within **48 hours**
 
-These figures reflect the project's own evaluation and are included here as documented project outcomes rather than production service-level guarantees.
+These are documented project-evaluation results, not current production service-level guarantees.
 
 ## Product Thinking
 
-This project was not only an implementation exercise. It started with an operational problem and an existing user workflow.
+The project started with an existing user workflow rather than a purely technical exercise:
 
-The development process focused on:
+1. understand how administrators were matching students and tutors manually
+2. translate the workflow into functional requirements
+3. design a simple admin interface around the highest-frequency tasks
+4. connect the interface to the organization's existing data source
+5. reduce repetitive searching and record handling
+6. test the solution against the original success criteria
+7. iterate using client feedback and usability observations
 
-1. understanding how administrators were performing tutor matching manually
-2. translating the workflow into clear functional requirements
-3. designing a simple interface around the administrator's tasks
-4. automating the repetitive parts of matching and record updates
-5. testing the solution against the original success criteria
-6. iterating based on client feedback and observed usability issues
-
-The result is a compact example of taking a real user problem from discovery through design, implementation, and evaluation.
+It is an example of taking a real operational problem from discovery through design, implementation, and evaluation.
 
 ## Technology
 
 | Area | Technology |
 |---|---|
-| Platform | Android |
-| Application development | MIT App Inventor |
-| Data layer | Google Sheets via web/API integration |
+| Client platform | Android |
+| Client development | MIT App Inventor / Blockly |
+| Data integration | Google Apps Script + Google Sheets |
+| Data format | JSON |
 | Product documentation | IB Computer Science IA development process |
 
 ## Repository Structure
 
 ```text
 student-matching-automation-system/
+├── Source/
+│   ├── README.md
+│   └── src/appinventor/.../Student4Student/
+│       ├── Screen1.bky
+│       ├── StudentRequests.bky
+│       ├── TutorRequests.bky
+│       └── MatchScreen.bky
 ├── Development/
 │   ├── Appendix A.pdf
 │   ├── Appendix B.pdf
@@ -100,53 +112,53 @@ student-matching-automation-system/
 └── README.md
 ```
 
-The `Development/` directory contains the planning, design, implementation, demonstration, and evaluation material. The `Product/` directory contains the Android APK.
+### Start here
+
+- **Want to understand the product?** Read this README.
+- **Want to inspect implementation logic?** Open [`Source/`](Source/).
+- **Want the complete design/development evidence?** Open [`Development/`](Development/).
+- **Want the archived Android build?** Open [`Product/`](Product/).
+
+## Source Code and Privacy
+
+The original MIT App Inventor project contained hard-coded Google Apps Script URLs for authentication and operational data retrieval. Because this is a public repository, those endpoints were removed before publishing the source export and replaced with non-routable `example.invalid` placeholders.
+
+The published source demonstrates the client-side implementation without exposing the original service URLs or private operational data. See [`Source/README.md`](Source/README.md) for the architecture and security notes.
 
 ## Installation
 
-> Only install APK files that you trust. This repository contains an archived student project build rather than a maintained production release.
-
-1. Clone the repository:
+> The APK is an archived student-project build, not a maintained production release.
 
 ```bash
 git clone https://github.com/rmuthukumar23/student-matching-automation-system.git
 cd student-matching-automation-system
 ```
 
-2. Transfer `Product/SOS Admin App.apk` to an Android device.
-3. Allow installation from the relevant source if Android prompts for permission.
-4. Install the APK.
+Then transfer `Product/SOS Admin App.apk` to an Android device and install it if you trust the build.
 
-The application depends on external data and authentication services used by the original project, so the archived build may not function as a standalone production application today.
+The archived APK depends on the original external services, so it may not operate as a standalone application today.
 
 ## Typical Admin Flow
 
 1. Sign in as an administrator.
-2. Import current student and tutor data.
-3. Review unmatched students and available tutors.
-4. Run the matching workflow.
-5. Review generated pairings and unresolved requests.
-6. Write matchup IDs and status updates back to Google Sheets.
-7. Send follow-up communication where required.
+2. Load current student or tutor requests.
+3. Search for a specific request ID or review the request list.
+4. Inspect the student's or tutor's grade and subject details.
+5. Select the relevant student and continue into the matching workflow.
+6. Use the connected operational process to complete and record the match.
 
-## Development Documentation
+## Engineering Lessons and Future Improvements
 
-For a deeper view of the engineering and product process, see the files in [`Development/`](Development/). They cover planning, requirements, interface and system design, development, testing, evaluation, and the final demonstration.
+A production rebuild would prioritize:
 
-## Privacy and Repository Hygiene
-
-This is a public repository. Any future development should use test or anonymized data and must not commit student records, credentials, API keys, or other private operational information.
-
-## Future Improvements
-
-If this project were developed further, the highest-value improvements would be:
-
-- publish the original source project or rebuild the application in a conventional source-controlled framework
-- separate matching logic from the user interface so it can be tested independently
-- add automated tests for matching edge cases
-- move credentials and configuration into secure environment-specific storage
-- replace spreadsheet-dependent workflows with a structured backend if usage grows
-- add audit history and clearer administrator review before finalizing matches
+- separating configuration and service URLs from UI blocks
+- replacing password-in-query authentication with a secure session or token flow
+- separating data-access, matching, and UI concerns
+- publishing or rebuilding the backend matching/data service in a conventional source-controlled stack
+- adding automated tests for parsing, matching criteria, and edge cases
+- replacing positional spreadsheet fields with a typed data model
+- adding audit history for administrator actions
+- moving from a spreadsheet-dependent backend to a structured datastore if usage grows
 
 ---
 
