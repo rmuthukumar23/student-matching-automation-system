@@ -1,69 +1,74 @@
-# Student Tutor Matching App
+# Students for Students Tutor Matching App
 
-**CS IB Computer Science IA Project**  
+Android admin app built for **Students for Students**, a student-run tutoring initiative. It was made to reduce the manual work involved in matching students with tutors through Google Sheets.
 
-An Android application developed for *Students for Students*, a student-run tutoring organization. The app automates matching students who need academic support with available student tutors, replacing a manual Google Sheets workflow. It reduces manual matching time to under 1.5 minutes, manages user authentication, and integrates directly with Google Sheets.
+> The app was completed before March 2025. I did not use GitHub during the original development, so this repository is a later archive of the project.
 
-## Project Structure
+## The problem
 
-The repository separates documentation, development artifacts, and the final app:
+Tutor requests and tutor availability were being managed manually in spreadsheets. As more requests came in, finding suitable matches and keeping track of them became slow and repetitive.
 
-Peer-match-SOS/  
-├─ Development/ – IB CS IA documentation and development files  
-│  ├─ Appendix A.pdf – Interview notes with the client  
-│  ├─ Appendix B.pdf – Additional reference material  
-│  ├─ Criterion_A_Planning.pdf  
-│  ├─ Criterion_B_Design.pdf  
-│  ├─ Criterion_B_RecordofTasks.pdf  
-│  ├─ Criterion_C_Development.pdf  
-│  ├─ Criterion_D.mp4 – Video demonstration of the app  
-│  └─ Criterion_E_Evaluation.pdf  
-└─ Product/  
-   └─ SOS Admin App.apk – Android application to install on devices  
+I built an admin app that kept the existing Google Sheets workflow but made it easier to search requests, review student and tutor details, and move through the matching process.
 
-Start in the `Development/` folder to review planning, design, development, and evaluation materials. Use `Product/` to access and run the final app.
+## What it does
 
-## How It Works
+- admin login and input validation
+- loads student and tutor requests from Google Sheets through Google Apps Script
+- searches requests by ID
+- shows grade and subject information
+- passes selected students into the matching flow
+- handles invalid or missing responses
+- supports the wider matching workflow documented in the project report
 
-**Authentication:** Admins log in using credentials managed in an external database.  
-**Data Integration:** Student and tutor details are imported from Google Sheets.  
-**Matching Algorithm:** The app automatically pairs students with tutors using compatibility criteria.  
-**Updating Records:** Matched pairs are assigned unique IDs and written back to Google Sheets.  
-**Interface & Communication:** Admins can view unmatched students, matched tutors, and unmatched tutors. Bulk emails can be sent directly from the app.  
+## Results
 
-This workflow ensures tutoring requests are responded to within 48 hours without manual intervention.
+The project evaluation recorded:
 
-## Features
+- matching time reduced to **under 1.5 minutes**
+- **90%+ matching success** in the tested scenarios
+- a workflow designed to respond to tutoring requests within **48 hours**
 
-- Secure login and authentication  
-- Automated student-tutor matching (≥90% success rate)  
-- Google Sheets integration for importing and updating data  
-- Lists of unmatched students, matched tutors, and unmatched tutors  
-- Bulk email functionality  
-- Intuitive graphical interface based on client feedback  
-- Error handling for invalid data input  
-- Reduced manual matching time to under 1.5 minutes  
+These figures come from the original project evaluation.
 
-## Technology Stack
+## Tech
 
-- Platform: Android  
-- Development Tool: MIT App Inventor (visual block-based programming)  
-- Data Integration: Google Sheets via Web API  
+- MIT App Inventor / Blockly
+- Android
+- Google Apps Script
+- Google Sheets
+- JSON web responses
 
-## Installation
+## Repository
 
-1. Clone the repository:  
-   `git clone git@github.com:rmuthukumar23/student-peer-matching.git`  
-2. Install the APK on an Android device:  
-   - Navigate to `Product/SOS Admin App.apk`  
-   - Enable installation from unknown sources on your Android device  
-   - Install the app  
+```text
+├── Source/       Sanitized App Inventor block source
+├── Product/      Android APK
+├── Development/  Planning, design, development and evaluation documents
+└── README.md
+```
 
-## Usage Guide
+The original App Inventor project used external Google Apps Script endpoints. The live URLs have been removed from the public source and replaced with placeholders. No student data or credentials are included.
 
-1. Log in as admin  
-2. Import student and tutor data from Google Sheets  
-3. View unmatched students and available tutors  
-4. Run the matching algorithm to pair students with tutors  
-5. Update Google Sheets with matchup IDs  
-6. Send bulk emails to tutors or students as needed
+The recovered source is the Android client side of the project. The original Apps Script backend code was not part of the archived `.aia` file.
+
+## Source
+
+The most useful implementation files are in [`Source/`](Source/):
+
+- `Screen1.bky` - login and authentication flow
+- `StudentRequests.bky` - student data retrieval, search and selection
+- `TutorRequests.bky` - tutor data retrieval and search
+- `MatchScreen.bky` - selected-student handoff into the matching flow
+
+For the full project process, see [`Development/`](Development/). The archived Android build is in [`Product/`](Product/).
+
+## Running the app
+
+The APK is an archived build and depends on the original external services, so it may no longer work as a standalone app.
+
+```bash
+git clone https://github.com/rmuthukumar23/student-matching-automation-system.git
+cd student-matching-automation-system
+```
+
+The APK is available at `Product/SOS Admin App.apk`.
