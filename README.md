@@ -2,7 +2,7 @@
 
 Android admin app built for **Students for Students**, a student-run tutoring initiative. It was made to reduce the manual work involved in matching students with tutors through Google Sheets.
 
-> This started as a project I was already working on for Students for Students and was later incorporated into my IB Computer Science HL Internal Assessment. The app was completed before March 2025. I did not use GitHub during the original development, so this repository is a later archive of the project.
+> The project grew out of a real problem I had been thinking about for Students for Students: tutor matching was becoming too manual and repetitive. I later developed the idea into a working solution through my **IB Computer Science HL Internal Assessment (IA)**, using the IA process to plan, design, implement, test and evaluate the app. The app was completed before March 2025. I did not use GitHub during the original development, so this repository is a later archive of the project.
 
 ## The problem
 
@@ -43,13 +43,28 @@ These figures come from the original project evaluation.
 ```text
 ├── Source/       Sanitized App Inventor block source
 ├── Product/      Android APK
-├── Development/  Planning, design, development and evaluation documents
+├── Development/  IB Computer Science HL IA documentation
 └── README.md
 ```
 
 The original App Inventor project used external Google Apps Script endpoints. The live URLs have been removed from the public source and replaced with placeholders. No student data or credentials are included.
 
 The recovered source is the Android client side of the project. The original Apps Script backend code was not part of the archived `.aia` file.
+
+## What the IA Criteria mean
+
+The files in [`Development/`](Development/) are organised using the assessment structure of the **IB Computer Science HL Internal Assessment**. The names `Criterion A`, `Criterion B`, and so on come from the IB coursework, not from this repository.
+
+In this project:
+
+- **Criterion A - Planning:** defines the problem, client, requirements and success criteria
+- **Criterion B - Design:** documents the proposed system and interface design; the accompanying Record of Tasks tracks the development process
+- **Criterion C - Development:** explains how the solution was implemented and the technical decisions behind it
+- **Criterion D - Functionality evidence:** the video demonstrates the finished product working
+- **Criterion E - Evaluation:** evaluates the final solution against the original success criteria and reflects on the outcome
+- **Appendices:** contain supporting material referenced by the IA documentation
+
+This documentation is useful beyond the coursework itself because it records the full path from identifying the problem through design, implementation and evaluation.
 
 ## Source
 
